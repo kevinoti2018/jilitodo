@@ -1,0 +1,7 @@
+{
+    "dataworkspace.excludedProjects": [
+        "Jilitodo/Jilitodo.sqlproj",
+        "JILIMALL/JILIMALL.sqlproj",
+        "api/database/jilitodo/jilitodo.sqlproj"
+    ]
+}
