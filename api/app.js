@@ -1,27 +1,34 @@
-const express =  require('express')
-const swaggerJSDoc = require('swagger-jsdoc')
-const swaggerUi =  require('swagger-ui-express')
-const options = require('./swagger/swagger.json')
+const express = require("express");
+const swaggerUi = require("swagger-ui-express");
 
-const app  =  express()
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
+const swaggerDefinition = require("./swagger.json");
+const { health } = require("./routes/dev/health");
 
+const app = express();
 
- const swaggerSpec = swaggerJSDoc(options)
- app.use('/api-docs', swaggerUi.serve,swaggerUi.setup(swaggerSpec))
+/**
+ * mount middlewares
+ */
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
- /**
-  * @swagger
-  * /:
-  *     get:
-  *         summary: this api is used to check if get method is working
-  *         description: this api is used to check if get method is working
-  *         responses: 
-  *             200:
-  *                 description: To test get method
-  */
- app.get('/',(req,res)=>{
-    res.send('testing swagger')
-})
-module.exports = app
+/**
+ * base url
+ */
+const jiliTodoBaseUrl = "/jilitodo/v1";
+
+/**
+ * mount routes
+ */
+app.use(jiliTodoBaseUrl, health);
+
+/**
+ * mount swagger
+ */
+app.use(
+  jiliTodoBaseUrl + "/swagger",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDefinition)
+);
+
+module.exports = app;
