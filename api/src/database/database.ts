@@ -1,10 +1,10 @@
-const sql = require('mssql')
+import sql from 'mssql'
 
 const sqlConfig = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PWD,
-  database: process.env.DB_NAME,
-  server: process.env.DB_SERVER,
+  user: process.env.DB_USER as string,
+  password: process.env.DB_PWD as string,
+  database: process.env.DB_NAME as string,
+  server: process.env.DB_SERVER as string,
   pool: {
     max: 10,
     min: 0,
@@ -16,7 +16,7 @@ const sqlConfig = {
   }
 }
 
-async function getDbConnection(){
+export const getDbConnection=async()=>{
     try{
         const pool = new sql.ConnectionPool(sqlConfig)
         await pool.connect()
@@ -29,4 +29,3 @@ async function getDbConnection(){
     }
 }
 
-module.exports = getDbConnection

@@ -1,10 +1,11 @@
-const express = require("express");
-const swaggerUi = require("swagger-ui-express");
+import express from "express"
+import swaggerUi from "swagger-ui-express";
 
-const swaggerDefinition = require("./swagger.json");
-const { health } = require("./routes/dev/health");
+import swaggerDefinition from "./swagger.json";
 
-const app = express();
+import { health } from "./routes/dev/health";
+
+export const app = express();
 
 /**
  * mount middlewares
@@ -31,4 +32,3 @@ app.use(
   swaggerUi.setup(swaggerDefinition)
 );
 
-module.exports = app;

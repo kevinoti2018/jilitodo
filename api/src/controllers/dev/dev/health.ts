@@ -1,4 +1,6 @@
-const checkHealth = (req, res) => {
+import{ Request,Response} from 'express'
+
+export const checkHealth = (req:Request, res:Response) => {
     try {
       return res.status(200).json({
         success: true,
@@ -10,8 +12,4 @@ const checkHealth = (req, res) => {
         message: "Jili Todo Api is down",
       });
     }
-  };
-  
-  module.exports = {
-    checkHealth,
   };
